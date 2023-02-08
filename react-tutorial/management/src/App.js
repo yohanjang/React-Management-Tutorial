@@ -1,5 +1,10 @@
 import './App.css';
 import Custormer from './components/Customer';
+import Table from '@mui/material/Table'
+import TableHead from '@mui/material/TableHead'
+import TableBody from '@mui/material/TableBody'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
 
 const customers = [
 {
@@ -31,10 +36,21 @@ const customers = [
 function App() {
   return (
     <div>
-      {
-        customers.map(c => {
-          return (
-            <Custormer
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>번호</TableCell>
+            <TableCell>이미지</TableCell>
+            <TableCell>이름</TableCell>
+            <TableCell>생년월일</TableCell>
+            <TableCell>성별</TableCell>
+            <TableCell>직업</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {customers.map(c => {
+            return (
+              <Custormer
               key={c.id}  // map으로 반복할 때 중복되지 않는 값으로 필수임.
               id={c.id}
               image={c.image}
@@ -42,10 +58,12 @@ function App() {
               birthday={c.birthday}
               gender={c.gender}
               job={c.job}
-            />
-          )
-        })
-      }
+              />
+              )
+            })
+          }
+        </TableBody>
+      </Table>
     </div>
   );
 }
