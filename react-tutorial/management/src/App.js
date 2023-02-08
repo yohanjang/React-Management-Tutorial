@@ -35,7 +35,7 @@ function App() {
         customers.map(c => {
           return (
             <Custormer
-              key={c.id}
+              key={c.id}  // map으로 반복할 때 중복되지 않는 값으로 필수임.
               id={c.id}
               image={c.image}
               name={c.name}
