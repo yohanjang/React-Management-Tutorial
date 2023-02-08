@@ -1,5 +1,7 @@
 import './App.css';
 import Custormer from './components/Customer';
+import CustormerProps from './components/Customer_props';
+import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
 import TableBody from '@mui/material/TableBody'
@@ -34,9 +36,14 @@ const customers = [
 ]
 
 function App() {
+  // console.log('this >>> '+ JSON.stringify(this));
+  // console.log('styles >>> '+ JSON.stringify(styles2));
+  // var { classes } = this;
   return (
-    <div>
-      <Table>
+    // <Paper className={classes.root}>
+    //   <Table className={classes.table}>
+    <Paper className='cssRoot'>
+      <Table className='cssTable'>
         <TableHead>
           <TableRow>
             <TableCell>번호</TableCell>
@@ -62,9 +69,18 @@ function App() {
               )
             })
           }
+          {customers.map(c => {
+            return (
+              <CustormerProps
+              key={c.id}  // map으로 반복할 때 중복되지 않는 값으로 필수임.
+              p={c}
+              />
+              )
+            })
+          }
         </TableBody>
       </Table>
-    </div>
+    </Paper>
   );
 }
 

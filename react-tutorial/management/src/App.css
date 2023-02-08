@@ -1,3 +1,13 @@
+.cssRoot {
+  width: '100%';
+  margin-top: 3px;
+  overflow-x: 'auto';
+}
+
+.cssTable {
+  min-width: 1080;
+}
+
 .App {
   text-align: center;
 }
