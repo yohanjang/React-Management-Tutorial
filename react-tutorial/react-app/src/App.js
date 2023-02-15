@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
 
 function Article(props) {
   return (
@@ -29,7 +30,7 @@ function Nav(props) {
     lis.push(<li key={t.id}>
       <a id={t.id} href={'/read/'+t.id} onClick={event => {
         event.preventDefault();
-        props.onChangeMod(event.target.id);
+        props.onChangeMod(Number(event.target.id));
       }}>{t.name}</a>
     </li>);
   }
@@ -46,21 +47,46 @@ function Nav(props) {
 }
 
 function App() {
+  // const _mode = useState('WELCOME');
+  // console.log('_mode', _mode);
+  // const mode = _mode[0];
+  // const setMode = _mode[1];
+  const [mode, setMode] = useState('WELCOME');
+  const [id, setId] = useState(null);
   const topics = [
     {id:1, url:"/read/1", name:"react"},
     {id:2, url:"/read/2", name:"css"},
     {id:3, url:"/read/3", name:"js"}
   ];
+  let content = null;
+  if (mode === 'WELCOME') {
+    content = <Article title="Welcom!" body="Hello, WEB"></Article>
+  } else if (mode === 'READ') {
+    let title, body = null;
+    for(let i=0; i<topics.length; i++) {
+      // console.log(topics[i].id, id);
+      if (topics[i].id === id) {
+        title = topics[i].name;
+        body = topics[i].name+ ' is ...';
+      }
+    }
+    // content = <Article title="Read!" body="Hello, READ"></Article>
+    content = <Article title={title} body={body}></Article>
+  }
   return (
     <div>
       <Header title="REACT" onChangeMod={function() {
-        alert('Header');
+        // alert('Header');
+        // mode = 'WELCOME';
+        setMode('WELCOME');
       }}></Header>
       {/* <Header title="WEB"></Header> */}
-      <Nav topics={topics} onChangeMod={(id) => {
-        alert(id);
+      <Nav topics={topics} onChangeMod={(_id) => {
+        // alert(id);
+        setMode('READ');
+        setId(_id);
       }}></Nav>
-      <Article title="Welcom!" body="Hello, WEB"></Article>
+      {content}
       {/* <Article title="Hi!" body="React, WEB"></Article> */}
     </div>
   );
