@@ -1,24 +1,55 @@
 // import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function Header(props) {
+  console.log('props', props)
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      Hello react world
+    <header>
+      <h1><a href="/">{props.title}</a></h1>
+    </header>
+  )
+}
+
+function Nav(props) {
+  const lis = [];
+  for (let i=0; i<props.topics.length; i++) {
+    let t = props.topics[i];
+    lis.push(<li key={t.id}><a href={'/read/'+t.id}>{t.name}</a></li>);
+  }
+  return (
+    <nav>
+      <ol>
+        {/* <li><a href="/read/1">html</a></li>
+        <li><a href="/read/2">css</a></li>
+        <li><a href="/read/3">js</a></li> */}
+        {lis}
+      </ol>
+    </nav>
+  )
+}
+
+function Article(props) {
+  return (
+    <article>
+      <h2>{props.title}</h2>
+      {props.body}
+    </article>
+  )
+}
+
+function App() {
+  const topics = [
+    {id:1, url:"/read/1", name:"react"},
+    {id:2, url:"/read/2", name:"css"},
+    {id:3, url:"/read/3", name:"js"}
+  ];
+  return (
+    <div>
+      <Header title="REACT"></Header>
+      {/* <Header title="WEB"></Header> */}
+      <Nav topics={topics}></Nav>
+      <Article title="Welcom!" body="Hello, WEB"></Article>
+      {/* <Article title="Hi!" body="React, WEB"></Article> */}
     </div>
   );
 }
