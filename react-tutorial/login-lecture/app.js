@@ -4,7 +4,6 @@
 const express = require("express");
 const app = express();
 
-const PORT = 3000;
 // routing
 const home = require("./routes/home");
 
@@ -14,9 +13,7 @@ app.set("view engine", "ejs");
 
 app.use("/", home);  // use -> 미들웨어
 
-app.listen(PORT, function() {
-    console.log('start server');
-});
+module.exports = app;
 
 // const http = require("http");
 // const app = http.createServer((req, res) => {
@@ -32,5 +29,3 @@ app.listen(PORT, function() {
 // app.listen(3001, () => {
 //     console.log('http server start');
 // });
-
-
