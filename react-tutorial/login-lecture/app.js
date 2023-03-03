@@ -1,19 +1,20 @@
+"use strict";
+
+// module
 const express = require("express");
 const app = express();
+
+const PORT = 3000;
+// routing
+const home = require("./routes/home");
 
 // 앱 세팅
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-    res.render("home/index")
-});
+app.use("/", home);  // use -> 미들웨어
 
-app.get("/login", (req, res) => {
-    res.render("home/login")
-});
-
-app.listen(3000, function() {
+app.listen(PORT, function() {
     console.log('start server');
 });
 
